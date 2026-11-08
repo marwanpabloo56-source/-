@@ -1,21 +1,2131 @@
 <!doctype html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>اخترعها! | Invent It! — لعبة الحفلات العائلية الكوميدية</title>
-    <meta name="description" content="لعبة الحفلات والعائلة الممتعة والكوميدية - اخترع أغرب المنتجات وسوّقها وكأنك بائع تلفزيون واكسب أصوات العائلة!" />
-    <meta property="og:title" content="اخترعها! | Invent It! — لعبة الحفلات العائلية الكوميدية" />
-    <meta property="og:description" content="لعبة الحفلات والعائلة الممتعة والكوميدية - اخترع أغرب المنتجات وسوّقها وكأنك بائع تلفزيون واكسب أصوات العائلة!" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#FF6B35" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-amber-50/40 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-amber-500 selection:text-white font-sans transition-colors duration-200">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>اخترعها! | Invent It! — لعبة الحفلات العائلية الكوميدية</title>
+  <meta name="description" content="لعبة الحفلات والعائلة الممتعة والكوميدية - اخترع أغرب المنتجات وسوّقها وكأنك بائع تلفزيون واكسب أصوات العائلة!" />
+  <meta name="theme-color" content="#F97316" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables & Theme */
+    :root {
+      --font-ar: 'Cairo', system-ui, -apple-system, sans-serif;
+      --font-en: 'Outfit', system-ui, -apple-system, sans-serif;
+      
+      --bg-page: #FFFBF5;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F8FAFC;
+      --bg-input: #F1F5F9;
+      --border: #E2E8F0;
+      --border-focus: #F97316;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-light: #94A3B8;
+
+      --primary: #F97316;
+      --primary-hover: #EA580C;
+      --primary-light: #FFF7ED;
+      --primary-border: #FFEDD5;
+      
+      --accent: #EAB308;
+      --teal: #0D9488;
+      --teal-light: #F0FDFA;
+      --rose: #E11D48;
+      --rose-light: #FFF1F2;
+      
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    html.dark {
+      --bg-page: #0B0F19;
+      --bg-card: #131B2E;
+      --bg-subtle: #1A243B;
+      --bg-input: #1E293B;
+      --border: #243049;
+      --border-focus: #FB923C;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-light: #64748B;
+
+      --primary: #FB923C;
+      --primary-hover: #F97316;
+      --primary-light: #2A1C12;
+      --primary-border: #43281C;
+
+      --teal-light: #0F2D2A;
+      --rose-light: #31131E;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-ar);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    html[dir="ltr"] body {
+      font-family: var(--font-en);
+    }
+
+    a, button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Navigation Bar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    .nav-inner {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #F97316, #EAB308);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
+    }
+    .brand-text {
+      font-size: 22px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #EA580C, #F59E0B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: color 0.15s, background-color 0.15s;
+    }
+    .nav-btn:hover, .nav-btn.active {
+      color: var(--primary);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.15s;
+    }
+    .icon-btn:hover {
+      background: var(--bg-card);
+      border-color: var(--primary);
+    }
+    .cta-btn-sm {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(90deg, #F97316, #EA580C);
+      color: #fff;
+      border: none;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
+      transition: transform 0.1s, opacity 0.15s;
+    }
+    .cta-btn-sm:active {
+      transform: scale(0.96);
+    }
+
+    /* Main Area */
+    main {
+      flex: 1;
+      padding: 24px 0 48px;
+    }
+
+    /* Common Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 800;
+      border: none;
+      transition: all 0.15s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #F97316, #EA580C);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.35);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #EA580C, #C2410C);
+      transform: translateY(-1px);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      background: var(--bg-subtle);
+    }
+    .btn-block {
+      width: 100%;
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* Cards & Layout */
+    .box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    @media (max-width: 640px) {
+      .box {
+        padding: 18px;
+        border-radius: var(--radius-md);
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 24px 0 40px;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+    .hero-highlight {
+      background: linear-gradient(90deg, #F97316, #EAB308);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: underline wavy #FDBA74 2px;
+    }
+    .hero-desc {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span.dot {
+      color: var(--border);
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* 3D Game Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .game-card {
+      border-radius: var(--radius-md);
+      padding: 20px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid;
+      position: relative;
+      user-select: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .game-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .card-problem {
+      background: linear-gradient(135deg, #FFF1F2 0%, #FFF7ED 100%);
+      border-color: #FECDD3;
+    }
+    html.dark .card-problem {
+      background: linear-gradient(135deg, #241419 0%, #1A1829 100%);
+      border-color: #881337;
+    }
+    .card-ingredient {
+      background: linear-gradient(135deg, #F0FDFA 0%, #EFF6FF 100%);
+      border-color: #CCFBF1;
+    }
+    html.dark .card-ingredient {
+      background: linear-gradient(135deg, #0C211F 0%, #141B2D 100%);
+      border-color: #115E59;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding-bottom: 10px;
+    }
+    html.dark .card-header {
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    .card-badge {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-problem .card-badge { color: var(--rose); }
+    .card-ingredient .card-badge { color: var(--teal); }
+    .card-text {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin: 12px 0;
+      color: var(--text-main);
+    }
+    .card-subtext {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-light);
+      font-weight: 700;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 8px;
+    }
+    html.dark .card-footer {
+      border-top-color: rgba(255,255,255,0.06);
+    }
+
+    /* Lobby Styling */
+    .lobby-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 860px) {
+      .lobby-grid {
+        grid-template-columns: 7fr 5fr;
+      }
+    }
+    .player-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .player-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .player-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: var(--primary-light);
+    }
+    .player-name {
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .del-btn {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 16px;
+      padding: 6px;
+      border-radius: 6px;
+    }
+    .del-btn:hover {
+      color: var(--rose);
+      background: var(--rose-light);
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--border-focus);
+      background: var(--bg-card);
+    }
+    .pill-selector {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill-btn {
+      flex: 1;
+      min-width: 70px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .pill-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Pitch Studio */
+    .pitch-stage {
+      background: linear-gradient(180deg, var(--bg-card) 0%, var(--primary-light) 100%);
+      border: 2px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      position: relative;
+    }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #FEE2E2;
+      color: #DC2626;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #DC2626;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+    .cue-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .cue-title {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .cue-slogan {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .cue-price {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: var(--teal-light);
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .soundboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .sound-btn {
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.1s;
+    }
+    .sound-btn:active {
+      transform: scale(0.95);
+      background: var(--primary-light);
+    }
+
+    /* Voting Screen */
+    .vote-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .vote-card:hover {
+      border-color: var(--primary);
+    }
+    .vote-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .vote-card.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: var(--border) !important;
+      background: var(--bg-subtle) !important;
+    }
+
+    /* Timer Widget */
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      font-family: monospace;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+    .timer-badge.urgent {
+      background: var(--rose-light);
+      color: var(--rose);
+      border-color: var(--rose);
+      animation: pulse 0.5s infinite;
+    }
+
+    /* Podium */
+    .podium {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 12px;
+      margin: 32px 0 24px;
+    }
+    .podium-step {
+      flex: 1;
+      max-width: 140px;
+      text-align: center;
+    }
+    .podium-box {
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 8px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .step-1 { height: 160px; background: linear-gradient(180deg, #F59E0B, #D97706); }
+    .step-2 { height: 120px; background: linear-gradient(180deg, #94A3B8, #64748B); }
+    .step-3 { height: 90px; background: linear-gradient(180deg, #B45309, #78350F); }
+
+    /* Confetti Canvas */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Utility */
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 16px; }
+    .mb-4 { margin-bottom: 16px; }
+    .gap-4 { gap: 16px; }
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body>
+  <!-- Canvas for celebration confetti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <button class="brand" onclick="navigateTo('landing')">
+        <div class="brand-icon">💡</div>
+        <span class="brand-text" id="navBrandText">اخترعها!</span>
+      </button>
+
+      <nav class="nav-links">
+        <button class="nav-btn" onclick="navigateTo('landing')" id="navHowTo">طريقة اللعب</button>
+        <button class="nav-btn" onclick="navigateTo('rules')" id="navRules">أسرار البيع</button>
+        <button class="nav-btn" onclick="navigateTo('gallery')" id="navGallery">معرض الافتكاسات</button>
+        <button class="nav-btn" onclick="navigateTo('custom_cards')" id="navCustom">كروت العيلة</button>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Sound Toggle -->
+        <button class="icon-btn" onclick="toggleSound()" id="soundBtn" title="كتم / تشغيل الصوت">🔊</button>
+        <!-- Theme Toggle -->
+        <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="الوضع الليلي / الفاتح">🌙</button>
+        <!-- Language Toggle -->
+        <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="تغيير اللغة">EN</button>
+        <!-- Play CTA -->
+        <button class="cta-btn-sm" onclick="navigateTo('lobby')" id="navPlayBtn">يلا نلعب!</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Main Content Views -->
+  <main class="container" id="appRoot">
+    <!-- View will be rendered dynamically by JavaScript -->
+  </main>
+
+  <script>
+    /* =====================================================================
+       1. GAME DATA: EGYPTIAN DIALECT CARDS (45+ Problems, 65+ Ingredients)
+       ===================================================================== */
+    const PROBLEM_CARDS = [
+      { id: 'p1', ar: 'الشرابات دايماً فردة بتضيع والتانية قاعدة تعيط لوحدها في الدرج!', en: 'One sock always disappears leaving the other crying alone in the drawer!', icon: '🧦' },
+      { id: 'p2', ar: 'الساندوتش دايماً بيقع على الناحية اللي فيها الجبنة والشيكولاتة!', en: 'The sandwich always lands face down on the cheese side!', icon: '🥪' },
+      { id: 'p3', ar: 'المنبه بيرن وأنا نايم في أحلى حلم ومش راضي يسكت!', en: 'The alarm rings right during the best dream and refuses to shut up!', icon: '⏰' },
+      { id: 'p4', ar: 'الواجب المدرسي طويل أوي وإيدي وجعتني من مسك القلم!', en: 'Homework is way too long and my hand aches from writing!', icon: '✏️' },
+      { id: 'p5', ar: 'القطة بتبصلي بنظرة تعالي كأني شغال عندها ومش عاجبها الأكل!', en: 'The cat glares at me judgmentally like I am its lowly butler!', icon: '🐱' },
+      { id: 'p6', ar: 'الآيس كريم بيسيح على إيدي ويدمر التيشيرت الجديد في الحر!', en: 'Ice cream melts down my hand and ruins my new shirt in summer!', icon: '🍦' },
+      { id: 'p7', ar: 'الشبشب بيطير في الصالة فجأة ومحدش عارف مين اللي رماه!', en: 'A flying slipper zooms across the room and nobody admits throwing it!', icon: '🩴' },
+      { id: 'p8', ar: 'الريموت بيغطس جوة بطانة الكنبة ومابيطلعش غير بعد سنة!', en: 'Remote control falls deep inside sofa crevices and vanishes!', icon: '📺' },
+      { id: 'p9', ar: 'الكوتشي الجديد بيزيق في السيراميك وفاضحني في كل حتة!', en: 'My new sneakers squeak loudly on tile floors embarrassing me!', icon: '👟' },
+      { id: 'p10', ar: 'العيش الفينو ناشف ومتحجر كأنه حجر طوب فرعوني!', en: 'Baguette bread became rock hard like an ancient Egyptian brick!', icon: '🥖' },
+      { id: 'p11', ar: 'النت بيفصل بالظبط أول ما الماتش أو المسلسل يوصل لأهم دقيقة!', en: 'Wi-Fi disconnects right at the climax of the game!', icon: '📶' },
+      { id: 'p12', ar: 'شاحن الموبايل مش بيشحن غير لما تلويه بزاوية 43 درجة وتسنده بمج!', en: 'Phone charger only works bent at 43 degrees propped against a mug!', icon: '🔌' },
+      { id: 'p13', ar: 'حد بيشرب الماية الساقعة ويسيب نقطتين بس في القزازة ويرجعها التلاجة!', en: 'Someone drinks all cold water and returns two drops into the fridge!', icon: '🧊' },
+      { id: 'p14', ar: 'صباع رجلي الصغير بيخبط في زاوية الكومودينو كل يوم بالليل في الضلمة!', en: 'Pinky toe finds the sharp nightstand corner every single night!', icon: '🦶' },
+      { id: 'p15', ar: 'البطيخة فتحناها على السكين وطلعت بيضا وقرعة وطعمها خيار بايت!', en: 'We sliced the watermelon and it was pale, hollow, and tasteless!', icon: '🍉' },
+      { id: 'p16', ar: 'كيس الشيبسي نصه هوا وربع فتات، ومفيهوش غير شيبسيتين سلام!', en: 'Chips bag is 90% air with only two intact chips inside!', icon: '🥔' },
+      { id: 'p17', ar: 'الناموسة مستقصدة ودني وبتغنيلي موال كل ما أطفي النور عشان أنام!', en: 'Mosquito serenades my ear the instant I turn off bedroom lights!', icon: '🦟' },
+      { id: 'p18', ar: 'كباية الشاي بلبن بتبرد في ثانية أول ما أسيبها عشان أرد على الباب!', en: 'Milk tea turns ice cold within seconds while answering the door!', icon: '☕' },
+      { id: 'p19', ar: 'باب المطبخ بيزيق فظيع وأنا بتسحب بالليل أعمل غارة على التلاجة!', en: 'Kitchen door squeaks like a horror film during midnight snack raid!', icon: '🚪' },
+      { id: 'p20', ar: 'المكواة علمت خط أصفر على القميص الأبيض قبل الفرح بنص ساعة!', en: 'Iron scorched a yellow line on my white shirt before wedding!', icon: '👔' },
+      { id: 'p21', ar: 'العربية ركنت ورايا صف تاني وساب النمرة مش باينة ومش هعرف أخرج!', en: 'Someone double parked behind me and left no phone number!', icon: '🚗' },
+      { id: 'p22', ar: 'المطر فاجئنا في الشارع والشمسية فتحت بالمقلوب مع أول هبة هوا!', en: 'Sudden rain caught us and the umbrella flipped completely inside out!', icon: '☔' },
+      { id: 'p23', ar: 'الحزام ضاق فجأة بعد صينية مكرونة بشاميل ومبقاش يقفل!', en: 'Belt gave up after lasagna feast and refuses to buckle!', icon: '🥘' },
+      { id: 'p24', ar: 'قشرة لب دخلت بين سناني ومش راضية تطلع بخلّة ولا بأي طريقة!', en: 'Sunflower seed shell wedged between teeth and resists toothpicks!', icon: '🦷' },
+      { id: 'p25', ar: 'التاكسي سألني: على فين يا فندم؟ ولما قولتله رد: لأ مش طريقي!', en: 'Taxi asks where to, and when told, says: "Nope, not my route!"', icon: '🚕' },
+      { id: 'p26', ar: 'الغسالة الأوتوماتيك بتتمشى في الحمام من قوة العصر وهتهرب من الشقة!', en: 'Washing machine walks across bathroom during spin cycle escaping!', icon: '🧼' },
+      { id: 'p27', ar: 'طنط فوزية بتسألني في كل عزومة: مش هنفرح بيك بقى؟ قدام كل الناس!', en: 'Auntie asks loudly at family dinner: "When are we getting you married?!"', icon: '👵' },
+      { id: 'p28', ar: 'البنك بعتلي رسالة إن رصيدي 4 جنيه و75 قرش ومصاريف السحب 5 جنيه!', en: 'Bank alerts balance is $0.20 and ATM withdrawal fee is $1.00!', icon: '💸' },
+      { id: 'p29', ar: 'الكائنات الفضائية نزلت الساحل الشمالي وعايزة تأجر شاليه بمليون جنيه!', en: 'Aliens landed on beach demanding luxury rental chalets!', icon: '🛸' },
+      { id: 'p30', ar: 'الشمس طالعة بدرجة حرارة 50 ومروحة السقف بتحدف علينا هواء فرن مخبز!', en: 'Outside is 115°F and the ceiling fan blows bakery furnace heat!', icon: '☀️' },
+      { id: 'p31', ar: 'الجيران بيشغلوا شنيور كهربائي يوم الجمعة الصبح الساعة 7 ونص بالثانية!', en: 'Upstairs neighbor starts electric drill at 7:30 AM Friday!', icon: '🔨' },
+      { id: 'p32', ar: 'البطارية نزلت لـ 1% وأنا ببعت فويس نوت سرية خطيرة ومش لاقي شاحن!', en: 'Battery hit 1% while sending a secret confidential voice note!', icon: '🪫' },
+      { id: 'p33', ar: 'توك توك طالع عكس في الشارع ومشغل مايك صدى صوت مهرجانات!', en: 'Rickshaw driving backwards with loud party electro subwoofer!', icon: '🛺' },
+      { id: 'p34', ar: 'البغبغان اللي في الصالون اتعلم كل أسرار العيلة وقاعد يفضحنا قدام الضيوف!', en: 'Parrot memorized family secrets and is spilling tea to guests!', icon: '🦜' },
+      { id: 'p35', ar: 'النمل عامل حزب معارض تحت حوض المطبخ ورافض يخرج غير لما ياخد نص السكرية!', en: 'Ants formed an opposition party under sink demanding sugar!', icon: '🐜' }
+    ];
+
+    const INGREDIENT_CARDS = [
+      { id: 'i1', ar: 'موزة مستوية زيادة عن اللزوم وسودت', en: 'Overripe black squishy banana', icon: '🍌' },
+      { id: 'i2', ar: 'فردة شبشب بلاستيك مقاس 45 قديمة', en: 'Old plastic slipper size 45', icon: '🩴' },
+      { id: 'i3', ar: 'مضرب دبانة كهربائي بيشرز شرار', en: 'Electric spark-zapping fly swatter', icon: '⚡' },
+      { id: 'i4', ar: 'حبل غسيل نايلون فسفوري 15 متر', en: '15-meter neon clothesline', icon: '🪢' },
+      { id: 'i5', ar: 'برطمان مخلل لفت بميته الحمرا المولعة', en: 'Spicy red pickled turnip jar', icon: '🫙' },
+      { id: 'i6', ar: 'صاروخ فضائي لعبة ببطارية قلم', en: 'Toy battery-operated rocket', icon: '🚀' },
+      { id: 'i7', ar: 'شنيور حفر يدوي صوته يخرم الطبلة', en: 'High pitch ear-piercing drill', icon: '🛠️' },
+      { id: 'i8', ar: 'بلونة هيليوم بتخلي صوتك ميكي ماوس', en: 'Helium balloon making your voice squeaky', icon: '🎈' },
+      { id: 'i9', ar: 'طاسة تيفال مقشرة بس مبرومة كويس', en: 'Old scratched but sturdy pan', icon: '🍳' },
+      { id: 'i10', ar: 'صفارة حكم كورة بتوجع الدماغ', en: 'Shrill referee whistle', icon: '📢' },
+      { id: 'i11', ar: 'مروحة سقف سريعة بتعمل صوت طيارة هليكوبتر', en: 'Helicopter vintage ceiling fan', icon: '🌀' },
+      { id: 'i12', ar: 'مسدس شمع سيليكون ساخن جداً', en: 'Super hot craft glue gun', icon: '🔫' },
+      { id: 'i13', ar: 'علبة مناديل مبللة بريحة الخوخ المنعش', en: 'Peach scented wet wipes pack', icon: '🧻' },
+      { id: 'i14', ar: 'ميكروفون بصدى صوت أفراح شعبي عالي', en: 'Party echo reverb microphone', icon: '🎤' },
+      { id: 'i15', ar: 'مغناطيس تلاجة على شكل خرطة بيتزا', en: 'Pizza slice fridge magnet', icon: '🍕' },
+      { id: 'i16', ar: 'شمسية صفرا مكسورة من ضلعين', en: 'Yellow umbrella with broken ribs', icon: '☂️' },
+      { id: 'i17', ar: 'بانيو أطفال بلاستيك فيه بطة بتزمر', en: 'Baby bathtub with rubber duck', icon: '🛁' },
+      { id: 'i18', ar: 'عجلة استبن لعربية كيا مفيهاش هوا', en: 'Flat spare car tire', icon: '🛞' },
+      { id: 'i19', ar: 'كيلو بصل أحمر من اللي بيحرّم الدموع', en: 'Pungent tear-inducing red onions', icon: '🧅' },
+      { id: 'i20', ar: 'براد شاي ألومنيوم قديم بيصفّر بصوت قطار', en: 'Whistling aluminum tea kettle', icon: '🫖' },
+      { id: 'i21', ar: 'لمبة ليد ملونة ديسكو بتلف وتعمل أنوار', en: 'Rotating disco rainbow LED bulb', icon: '💡' },
+      { id: 'i22', ar: 'صينية بسبوسة غرقانة شربات وقشطة', en: 'Tray of sweet honey basbousa pastry', icon: '🍰' },
+      { id: 'i23', ar: 'بكرة لزق شفاف عريضة ومش لاقي بدايتها', en: 'Packing tape with invisible lost end', icon: '📦' },
+      { id: 'i24', ar: 'نضارة غطس عليها بخار ومبتشوفش منها', en: 'Foggy underwater scuba mask', icon: '🤿' },
+      { id: 'i25', ar: 'منفاخ عجل يدوي بيطلع صرير حديد', en: 'Creaky manual bicycle tire pump', icon: '🚲' },
+      { id: 'i26', ar: 'ساعة يد رقمية بتزمر كل ساعة بالظبط', en: 'Digital watch beeping every hour', icon: '⌚' },
+      { id: 'i27', ar: 'شال صوف خشن بتاع ستي بيدفي جداً', en: 'Itchy warm grandmother wool shawl', icon: '🧣' },
+      { id: 'i28', ar: 'قالب جبنة رومي قديمة ريحتها تقلب العمارة', en: 'Aged sharp pungent Rumi cheese', icon: '🧀' },
+      { id: 'i29', ar: 'رادار فضائي بيلقط كلام الجيران في البلكونة', en: 'Mini radar eavesdropping balcony talk', icon: '📡' },
+      { id: 'i30', ar: 'حجر نيزك ناري بيطلع بخار وبيدفي الشاي', en: 'Glowing meteorite keeping tea hot', icon: '☄️' },
+      { id: 'i31', ar: 'طاقية إخفاء بس بتخفي راسك وتفضح جسمك', en: 'Invisibility hat that only conceals head', icon: '🎩' },
+      { id: 'i32', ar: 'سجادة طائرة بس سرعتها 20 كم/س في الزحمة', en: 'Flying carpet limited to 15 mph in traffic', icon: '🧙' },
+      { id: 'i33', ar: 'ليزر أحمر بيشاور على الأكل الحلو في التلاجة', en: 'Red laser pointing directly at snacks', icon: '🔴' },
+      { id: 'i34', ar: 'نضارة واقع افتراضي بتوريك كل الناس ببيجامات', en: 'VR headset showing everyone in pajamas', icon: '🥽' },
+      { id: 'i35', ar: 'موتور توك توك طيارة بيشتغل بزيت قلية بطاطس', en: 'Flying rickshaw engine fueled by fries oil', icon: '🚀' },
+      { id: 'i36', ar: 'مكعب ثلج لا نهائي مبيسيحش وبيغني في الكباية', en: 'Singing ice cube that never melts', icon: '🧊' },
+      { id: 'i37', ar: 'حزام ناسف بس بيفرقع فوشار وكراميل في كل حتة', en: 'Party belt popping fresh caramel popcorn', icon: '🍿' },
+      { id: 'i38', ar: 'مغناطيس عملاق بيلقط الفلوس الفكة من جيوب الناس', en: 'Super magnet pulling spare loose coins', icon: '🧲' },
+      { id: 'i39', ar: 'مراية مسحورة بتقولك: أنت قمر بس خس شوية', en: 'Sassy magic mirror with backhanded compliments', icon: '🪞' },
+      { id: 'i40', ar: 'كيس فحم سريع الاشتعال بريحة مانجو استوائية', en: 'Barbecue charcoal with tropical mango aroma', icon: '🔥' }
+    ];
+
+    const PRESET_AVATARS = [
+      { nameAr: 'البروفيسور فتك', nameEn: 'Prof. Brainy', emoji: '🧐' },
+      { nameAr: 'طنط فوزية', nameEn: 'Auntie Fawzia', emoji: '👵' },
+      { nameAr: 'الواد حمادة', nameEn: 'Little Hamada', emoji: '🤓' },
+      { nameAr: 'كابتن برعي', nameEn: 'Captain Boraie', emoji: '😎' },
+      { nameAr: 'دكتورة منى', nameEn: 'Dr. Mona', emoji: '👩‍🔬' },
+      { nameAr: 'الست الوالدة', nameEn: 'Mom Queen', emoji: '👑' },
+      { nameAr: 'المهندس شريف', nameEn: 'Eng. Sherif', emoji: '🧑‍💼' },
+      { nameAr: 'عمو جابر', nameEn: 'Uncle Gaber', emoji: '🤠' }
+    ];
+
+    /* =====================================================================
+       2. WEB AUDIO API SYNTHESIZER (100% Offline, Zero external files)
+       ===================================================================== */
+    let audioCtx = null;
+    let isSoundOn = true;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) audioCtx = new AudioClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, duration, type = 'sine', gainVal = 0.2) {
+      if (!isSoundOn) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(gainVal, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + duration + 0.05);
+    }
+
+    function soundFlip() {
+      playTone(280, 0.1, 'sine', 0.15);
+    }
+
+    function soundTick() {
+      playTone(600, 0.04, 'triangle', 0.1);
+    }
+
+    function soundUrgent() {
+      playTone(900, 0.08, 'sine', 0.2);
+    }
+
+    function soundGong() {
+      if (!isSoundOn) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [320, 440, 580].forEach((f, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.setValueAtTime(f, now + i * 0.04);
+        gain.gain.setValueAtTime(0.2, now + i * 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.04);
+        osc.stop(now + 0.8);
+      });
+    }
+
+    function soundCash() {
+      if (!isSoundOn) return;
+      playTone(987, 0.25, 'sine', 0.2);
+      setTimeout(() => playTone(1318, 0.4, 'sine', 0.25), 90);
+    }
+
+    function soundBoing() {
+      if (!isSoundOn) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.exponentialRampToValueAtTime(520, now + 0.15);
+      osc.frequency.exponentialRampToValueAtTime(240, now + 0.3);
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.36);
+    }
+
+    function soundApplause() {
+      if (!isSoundOn) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const bufferSize = ctx.sampleRate * 0.8;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1100, now);
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start(now);
+      noise.stop(now + 0.85);
+    }
+
+    function soundFanfare() {
+      if (!isSoundOn) return;
+      const chords = [523.25, 659.25, 783.99, 1046.50];
+      chords.forEach((note, idx) => {
+        setTimeout(() => playTone(note, 0.35, 'triangle', 0.2), idx * 130);
+      });
+    }
+
+    /* =====================================================================
+       3. STANDALONE CONFETTI ENGINE (HTML5 Canvas, Zero dependencies)
+       ===================================================================== */
+    let confettiAnimationId = null;
+    function triggerConfetti(durationSeconds = 3) {
+      const canvas = document.getElementById('confettiCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#F97316', '#EAB308', '#0D9488', '#EC4899', '#3B82F6', '#8B5CF6'];
+
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: canvas.width * 0.5,
+          y: canvas.height * 0.5,
+          vx: (Math.random() - 0.5) * 22,
+          vy: (Math.random() - 0.7) * 22,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vrot: (Math.random() - 0.5) * 12,
+          alpha: 1
+        });
+      }
+
+      const start = Date.now();
+      if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
+
+      function frame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const elapsed = (Date.now() - start) / 1000;
+
+        for (let p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.4; // gravity
+          p.rotation += p.vrot;
+          if (elapsed > durationSeconds - 1) {
+            p.alpha -= 0.03;
+          }
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        }
+
+        if (elapsed < durationSeconds) {
+          confettiAnimationId = requestAnimationFrame(frame);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      frame();
+    }
+
+    /* =====================================================================
+       4. GAME STATE & LOCALSTORAGE
+       ===================================================================== */
+    const STORAGE = {
+      GALLERY: 'invent_it_gallery_v2',
+      CUSTOM_PROBLEMS: 'invent_it_custom_p_v2',
+      CUSTOM_INGREDIENTS: 'invent_it_custom_i_v2'
+    };
+
+    let gameState = {
+      currentView: 'landing', // landing, lobby, inventing, pitch, voting, round_reveal, game_over, gallery, custom_cards, rules
+      language: 'ar', // ar or en
+      isDark: false,
+      players: [
+        { id: '1', name: 'البروفيسور فتك', avatar: '🧐', score: 0 },
+        { id: '2', name: 'طنط فوزية', avatar: '👵', score: 0 },
+        { id: '3', name: 'الواد حمادة', avatar: '🤓', score: 0 },
+        { id: '4', name: 'كابتن برعي', avatar: '😎', score: 0 }
+      ],
+      totalRounds: 5,
+      currentRound: 1,
+      inventTime: 60,
+      roundProblem: null,
+      roundIngredients: [],
+      // Inventing phase
+      activePlayerIndex: 0,
+      inventions: [], // collected in current round
+      // Pitch phase
+      activePitchIndex: 0,
+      pitchTimer: 60,
+      pitchInterval: null,
+      // Voting phase
+      activeVoterIndex: 0,
+      selectedVoteId: null,
+      votesMap: {}, // voterId -> inventionId
+      // Tournament history
+      roundWinners: []
+    };
+
+    /* =====================================================================
+       5. NAVIGATION & CONTROLS
+       ===================================================================== */
+    function navigateTo(view) {
+      soundFlip();
+      clearInterval(gameState.pitchInterval);
+      gameState.currentView = view;
+      render();
+      window.scrollTo(0, 0);
+    }
+
+    function toggleTheme() {
+      gameState.isDark = !gameState.isDark;
+      if (gameState.isDark) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeBtn').innerText = '☀️';
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeBtn').innerText = '🌙';
+      }
+    }
+
+    function toggleSound() {
+      isSoundOn = !isSoundOn;
+      document.getElementById('soundBtn').innerText = isSoundOn ? '🔊' : '🔇';
+    }
+
+    function toggleLanguage() {
+      soundFlip();
+      gameState.language = gameState.language === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = gameState.language;
+      document.documentElement.dir = gameState.language === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('langBtn').innerText = gameState.language === 'ar' ? 'EN' : 'عربي';
+
+      // Update header labels
+      const isAr = gameState.language === 'ar';
+      document.getElementById('navBrandText').innerText = isAr ? 'اخترعها!' : 'Invent It!';
+      document.getElementById('navHowTo').innerText = isAr ? 'طريقة اللعب' : 'How to Play';
+      document.getElementById('navRules').innerText = isAr ? 'أسرار البيع' : 'Pitch Secrets';
+      document.getElementById('navGallery').innerText = isAr ? 'معرض الافتكاسات' : 'Gallery';
+      document.getElementById('navCustom').innerText = isAr ? 'كروت العيلة' : 'Custom Cards';
+      document.getElementById('navPlayBtn').innerText = isAr ? 'يلا نلعب!' : 'Play Now!';
+
+      render();
+    }
+
+    /* =====================================================================
+       6. CORE GAME LOGIC & HELPERS
+       ===================================================================== */
+    function getAllProblems() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE.CUSTOM_PROBLEMS) || '[]');
+        return [...PROBLEM_CARDS, ...stored];
+      } catch (_) {
+        return PROBLEM_CARDS;
+      }
+    }
+
+    function getAllIngredients() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE.CUSTOM_INGREDIENTS) || '[]');
+        return [...INGREDIENT_CARDS, ...stored];
+      } catch (_) {
+        return INGREDIENT_CARDS;
+      }
+    }
+
+    function startNewGame() {
+      if (gameState.players.length < 3) {
+        alert(gameState.language === 'ar' ? 'محتاجين 3 لاعبين على الأقل عشان التصويت والضحك يظبط!' : 'Please add at least 3 players!');
+        return;
+      }
+      soundFanfare();
+      gameState.players.forEach(p => p.score = 0);
+      gameState.currentRound = 1;
+      gameState.roundWinners = [];
+      dealRoundCards();
+      startInventingPhase();
+    }
+
+    function dealRoundCards() {
+      const pList = getAllProblems();
+      const iList = getAllIngredients();
+      gameState.roundProblem = pList[Math.floor(Math.random() * pList.length)];
+
+      const shuffled = [...iList].sort(() => 0.5 - Math.random());
+      gameState.roundIngredients = [shuffled[0], shuffled[1]];
+      gameState.inventions = [];
+    }
+
+    function startInventingPhase() {
+      gameState.activePlayerIndex = 0;
+      gameState.currentView = 'inventing';
+      render();
+    }
+
+    function submitPlayerInvention() {
+      const nameInput = document.getElementById('invName');
+      const sloganInput = document.getElementById('invSlogan');
+      const priceInput = document.getElementById('invPrice');
+      const featureInput = document.getElementById('invFeatures');
+
+      const name = (nameInput ? nameInput.value.trim() : '') || (gameState.language === 'ar' ? 'الفنكوش السحري 3000' : 'Secret Contraption');
+      const slogan = (sloganInput ? sloganInput.value.trim() : '') || (gameState.language === 'ar' ? 'هتدعيلي طول عمرك!' : 'Guaranteed to work!');
+      const price = (priceInput ? priceInput.value.trim() : '') || (gameState.language === 'ar' ? '99 جنيه وشكراً' : '$19.99');
+      const features = (featureInput ? featureInput.value.trim() : '') || (gameState.language === 'ar' ? 'بيحل المشكلة بالحب والمكونات العجيبة!' : 'Miraculously solves the problem!');
+
+      const curPlayer = gameState.players[gameState.activePlayerIndex];
+
+      gameState.inventions.push({
+        id: 'inv_' + Date.now() + '_' + curPlayer.id,
+        playerId: curPlayer.id,
+        playerName: curPlayer.name,
+        playerAvatar: curPlayer.avatar,
+        name,
+        slogan,
+        price,
+        features,
+        votes: 0
+      });
+
+      soundCash();
+
+      if (gameState.activePlayerIndex < gameState.players.length - 1) {
+        gameState.activePlayerIndex++;
+        render();
+      } else {
+        // All drafted! Go to Pitch
+        gameState.activePitchIndex = 0;
+        gameState.pitchTimer = gameState.inventTime;
+        gameState.currentView = 'pitch';
+        render();
+      }
+    }
+
+    function startPitchTimer() {
+      clearInterval(gameState.pitchInterval);
+      soundBoing();
+      gameState.pitchInterval = setInterval(() => {
+        if (gameState.pitchTimer > 0) {
+          gameState.pitchTimer--;
+          const el = document.getElementById('pitchTimerText');
+          if (el) el.innerText = gameState.pitchTimer + 's';
+          if (gameState.pitchTimer <= 5) soundUrgent();
+        } else {
+          clearInterval(gameState.pitchInterval);
+          soundGong();
+        }
+      }, 1000);
+    }
+
+    function nextPitcher() {
+      soundFlip();
+      clearInterval(gameState.pitchInterval);
+      gameState.pitchTimer = gameState.inventTime;
+      if (gameState.activePitchIndex < gameState.inventions.length - 1) {
+        gameState.activePitchIndex++;
+        render();
+      } else {
+        // Go to voting
+        gameState.activeVoterIndex = 0;
+        gameState.selectedVoteId = null;
+        gameState.votesMap = {};
+        gameState.currentView = 'voting';
+        render();
+      }
+    }
+
+    function castVote() {
+      if (!gameState.selectedVoteId) {
+        alert(gameState.language === 'ar' ? 'اختار اختراع الأول يا معلم!' : 'Please select an invention first!');
+        return;
+      }
+      soundCash();
+      const voter = gameState.players[gameState.activeVoterIndex];
+      gameState.votesMap[voter.id] = gameState.selectedVoteId;
+      gameState.selectedVoteId = null;
+
+      if (gameState.activeVoterIndex < gameState.players.length - 1) {
+        gameState.activeVoterIndex++;
+        render();
+      } else {
+        // Tallied! Calculate votes
+        gameState.inventions.forEach(inv => inv.votes = 0);
+        Object.values(gameState.votesMap).forEach(votedId => {
+          const target = gameState.inventions.find(i => i.id === votedId);
+          if (target) {
+            target.votes++;
+            const player = gameState.players.find(p => p.id === target.playerId);
+            if (player) player.score++;
+          }
+        });
+
+        // Round Champion
+        const sorted = [...gameState.inventions].sort((a,b) => b.votes - a.votes);
+        gameState.roundWinners.push(sorted[0]);
+
+        triggerConfetti(3);
+        soundFanfare();
+        gameState.currentView = 'round_reveal';
+        render();
+      }
+    }
+
+    function nextRoundOrFinish() {
+      if (gameState.currentRound < gameState.totalRounds) {
+        soundFlip();
+        gameState.currentRound++;
+        dealRoundCards();
+        startInventingPhase();
+      } else {
+        triggerConfetti(5);
+        soundFanfare();
+        gameState.currentView = 'game_over';
+        render();
+      }
+    }
+
+    function saveToGallery(inv) {
+      try {
+        soundCash();
+        const existing = JSON.parse(localStorage.getItem(STORAGE.GALLERY) || '[]');
+        existing.unshift({
+          ...inv,
+          savedAt: new Date().toLocaleDateString(gameState.language === 'ar' ? 'ar-EG' : 'en-US')
+        });
+        localStorage.setItem(STORAGE.GALLERY, JSON.stringify(existing));
+        alert(gameState.language === 'ar' ? 'اتحفظت الافتكاسة في المعرض بنجاح! ⭐' : 'Saved to Gallery! ⭐');
+      } catch (_) {}
+    }
+
+    /* =====================================================================
+       7. VIEW RENDERERS (Clean HTML Strings, Zero external UI libs)
+       ===================================================================== */
+    function render() {
+      const root = document.getElementById('appRoot');
+      const isAr = gameState.language === 'ar';
+
+      switch (gameState.currentView) {
+        case 'landing':
+          root.innerHTML = renderLanding(isAr);
+          break;
+        case 'lobby':
+          root.innerHTML = renderLobby(isAr);
+          break;
+        case 'inventing':
+          root.innerHTML = renderInventing(isAr);
+          break;
+        case 'pitch':
+          root.innerHTML = renderPitch(isAr);
+          break;
+        case 'voting':
+          root.innerHTML = renderVoting(isAr);
+          break;
+        case 'round_reveal':
+          root.innerHTML = renderRoundReveal(isAr);
+          break;
+        case 'game_over':
+          root.innerHTML = renderGameOver(isAr);
+          break;
+        case 'gallery':
+          root.innerHTML = renderGallery(isAr);
+          break;
+        case 'custom_cards':
+          root.innerHTML = renderCustomCards(isAr);
+          break;
+        case 'rules':
+          root.innerHTML = renderRules(isAr);
+          break;
+      }
+    }
+
+    /* LANDING PAGE */
+    function renderLanding(isAr) {
+      const sampleP = PROBLEM_CARDS[Math.floor(Math.random() * PROBLEM_CARDS.length)];
+      const sampleI1 = INGREDIENT_CARDS[0];
+      const sampleI2 = INGREDIENT_CARDS[1];
+
+      return `
+        <div class="hero">
+          <div class="hero-kicker">
+            ✨ ${isAr ? 'أقوى لعبة عائلية لبيع الهوا في إزايز والضحك من القلب!' : 'The #1 Hilarious Family Invention Pitch Party Game!'}
+          </div>
+
+          <h1 class="hero-title">
+            ${isAr ? 'اخترع أي فنكوش..' : 'Invent ridiculous gadgets..'}
+            <br />
+            <span class="hero-highlight">
+              ${isAr ? 'وبيعه للعيلة وكأنك بياع تلفزيون محترف!' : 'Pitch them to your family like a TV salesperson!'}
+            </span>
+          </h1>
+
+          <p class="hero-desc">
+            ${isAr 
+              ? 'كارت مشكلة تقطم الضهر + مكونين أعجب من بعض = افتكاسة مفيش منها اتنين! عندك 60 ثانية تخترع المنتج، تحط له سعر وشعار يرن، وتبيعه بأعلى صوت عشان تلم أصوات الحبايب!'
+              : '1 wacky problem + 2 bizarre ingredients = an unforgettable invention! Beat the 60s timer, invent, price, pitch your product out loud, and win family votes!'}
+          </p>
+
+          <div class="hero-meta">
+            <span>👥 ${isAr ? '3 إلى 8 لاعبين' : '3 to 8 Players'}</span>
+            <span class="dot">·</span>
+            <span>🎂 ${isAr ? 'من سن 8 سنين لفوق' : 'Ages 8 & Up'}</span>
+            <span class="dot">·</span>
+            <span>⏱️ ${isAr ? '15-20 دقيقة ضحك' : '15-20 Min Laughs'}</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="navigateTo('lobby')">
+              ▶ ${isAr ? 'ابدأ اللمة واللعب حالاً' : 'Start Playing Now'}
+            </button>
+            <button class="btn btn-secondary" onclick="navigateTo('rules')">
+              📖 ${isAr ? 'كتالوج القواعد والأسرار' : 'Rules & Secrets'}
+            </button>
+          </div>
+        </div>
+
+        <!-- Sample Cards Showcase -->
+        <div class="box mt-4">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div>
+              <div style="font-size:12px; font-weight:800; color:var(--primary); text-transform:uppercase;">
+                💡 ${isAr ? 'جرب شوف شكل الكروت' : 'Sample Round Deck'}
+              </div>
+              <h3 style="font-size:20px; font-weight:900;">
+                ${isAr ? 'إزاي بتتركب الافتكاسة؟ جرب اسحب وشوف!' : 'How do cards match together?'}
+              </h3>
+            </div>
+            <button class="btn btn-secondary" onclick="soundFlip(); render();" style="padding:6px 12px; font-size:12px;">
+              🔄 ${isAr ? 'سحب كروت جديدة' : 'Draw New Cards'}
+            </button>
+          </div>
+
+          <div class="cards-grid">
+            <div class="game-card card-problem">
+              <div class="card-header">
+                <span class="card-badge">${sampleP.icon} ${isAr ? 'كارت المشكلة المستفزة' : 'Problem Card'}</span>
+              </div>
+              <p class="card-text">${isAr ? sampleP.ar : sampleP.en}</p>
+              <div class="card-footer">
+                <span>⚠️ ${isAr ? 'ورطة محتاجة حل' : 'Needs Solution'}</span>
+              </div>
+            </div>
+
+            <div class="game-card card-ingredient">
+              <div class="card-header">
+                <span class="card-badge">${sampleI1.icon} ${isAr ? 'المكون الأول الإجباري' : 'Ingredient #1'}</span>
+              </div>
+              <p class="card-text">${isAr ? sampleI1.ar : sampleI1.en}</p>
+              <div class="card-footer">
+                <span>🧪 ${isAr ? 'خام إجباري' : 'Required Item'}</span>
+              </div>
+            </div>
+
+            <div class="game-card card-ingredient">
+              <div class="card-header">
+                <span class="card-badge">${sampleI2.icon} ${isAr ? 'المكون التاني الإجباري' : 'Ingredient #2'}</span>
+              </div>
+              <p class="card-text">${isAr ? sampleI2.ar : sampleI2.en}</p>
+              <div class="card-footer">
+                <span>🚀 ${isAr ? 'خام إجباري' : 'Required Item'}</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-center" style="font-size:12px; color:var(--text-muted); margin-top:8px;">
+            💡 ${isAr ? 'مهمتك: تخترع منتج يحل المشكلة دي باستخدام المكونين دول.. وتبيعه للعيلة بأعلى سعر!' : 'Your goal: combine both items to solve the problem and pitch your invention!'}
+          </p>
+        </div>
+
+        <!-- 3-Step Guide -->
+        <div class="box mt-4">
+          <h2 class="text-center" style="font-size:24px; font-weight:900; margin-bottom:20px;">
+            ${isAr ? 'إزاي بنلعب في 3 خطوات بسيطة؟' : 'How to Play in 3 Steps'}
+          </h2>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+            <div style="padding:16px; border-radius:12px; background:var(--bg-subtle);">
+              <div style="font-size:24px; margin-bottom:8px;">1️⃣</div>
+              <h4 style="font-weight:900; font-size:16px; margin-bottom:4px;">${isAr ? 'اسحب كارت الورطة والمكونات' : 'Deal the Cards'}</h4>
+              <p style="font-size:13px; color:var(--text-muted);">${isAr ? 'كل جولة بيطلع كارت مشكلة تقطم الضهر ومكونين عجيبين ملهمش علاقة ببعض!' : 'Get 1 funny problem and 2 bizarre ingredients each round.'}</p>
+            </div>
+
+            <div style="padding:16px; border-radius:12px; background:var(--bg-subtle);">
+              <div style="font-size:24px; margin-bottom:8px;">2️⃣</div>
+              <h4 style="font-weight:900; font-size:16px; margin-bottom:4px;">${isAr ? 'دقيقة واحدة لافتكاس المنتج' : '60 Seconds to Invent'}</h4>
+              <p style="font-size:13px; color:var(--text-muted);">${isAr ? 'فكر في اسم عبقري، شعار يرن، وسعر لا يقاوم. املأ بياناتك واستعد للبيع!' : 'Create a contraption name, catchy slogan, and sales price.'}</p>
+            </div>
+
+            <div style="padding:16px; border-radius:12px; background:var(--bg-subtle);">
+              <div style="font-size:24px; margin-bottom:8px;">3️⃣</div>
+              <h4 style="font-weight:900; font-size:16px; margin-bottom:4px;">${isAr ? 'بيع واكسب أصوات العيلة' : 'Pitch & Win Votes'}</h4>
+              <p style="font-size:13px; color:var(--text-muted);">${isAr ? 'ادخل استوديو التلفزيون واقنع العيلة زي بياعين الإعلانات. تصويت سري وكل صوت بنقطة!' : 'Deliver your sales pitch out loud, then cast secret votes.'}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* LOBBY */
+    function renderLobby(isAr) {
+      let playersHtml = gameState.players.map((p, idx) => `
+        <div class="player-row">
+          <div class="player-info">
+            <span style="font-size:12px; font-weight:800; color:var(--text-light); width:18px;">#${idx + 1}</span>
+            <div class="player-avatar">${p.avatar}</div>
+            <div>
+              <div class="player-name">${p.name}</div>
+              <div style="font-size:11px; color:var(--text-muted);">${isAr ? 'مخترع جاهز للبيع' : 'Ready to Pitch'}</div>
+            </div>
+          </div>
+          ${gameState.players.length > 2 ? `
+            <button class="del-btn" onclick="removePlayer('${p.id}')" title="حذف">🗑️</button>
+          ` : ''}
+        </div>
+      `).join('');
+
+      let presetsHtml = PRESET_AVATARS.map(a => `
+        <button class="btn btn-secondary" onclick="addPresetPlayer('${isAr ? a.nameAr : a.nameEn}', '${a.emoji}')" style="padding:6px 10px; font-size:12px;">
+          ${a.emoji} ${isAr ? a.nameAr : a.nameEn}
+        </button>
+      `).join('');
+
+      return `
+        <div class="text-center mb-4">
+          <div class="hero-kicker">⚙️ ${isAr ? 'غرفة تجهيز الحريفة' : 'Party Setup'}</div>
+          <h1 style="font-size:32px; font-weight:900;">${isAr ? 'ظبط القعدة واللاعبين' : 'Game Lobby'}</h1>
+          <p style="color:var(--text-muted); font-size:14px;">${isAr ? 'اختاروا شخصياتكم وحددوا عدد الجولات ويلا نسخن!' : 'Add players and select round count!'}</p>
+        </div>
+
+        <div class="lobby-grid">
+          <!-- Left: Player Roster -->
+          <div class="box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <h3 style="font-size:18px; font-weight:900;">👥 ${isAr ? 'اللاعبين في القعدة' : 'Players'} (${gameState.players.length}/8)</h3>
+              <span style="font-size:12px; color:var(--text-muted); font-weight:700;">${isAr ? 'من 3 لـ 8 لاعبين' : '3 to 8 players'}</span>
+            </div>
+
+            <div>${playersHtml}</div>
+
+            ${gameState.players.length < 8 ? `
+              <div class="mt-4" style="border-top:1px solid var(--border); padding-top:16px;">
+                <div style="display:flex; gap:8px;">
+                  <input type="text" id="newPlayerInput" placeholder="${isAr ? 'اسم المخترع (مثلاً: حمادة، نوجا)' : 'Player Name'}" class="form-input" maxlength="20" />
+                  <button class="btn btn-primary" onclick="addNewPlayer()">➕ ${isAr ? 'إضافة' : 'Add'}</button>
+                </div>
+                <div style="font-size:12px; color:var(--text-muted); margin:12px 0 6px;">${isAr ? 'أو ضيف شخصية مصرية جاهزة بضغطة واحدة:' : 'Or tap a preset character:'}</div>
+                <div style="display:flex; flex-wrap:wrap; gap:6px;">${presetsHtml}</div>
+              </div>
+            ` : `
+              <div class="text-center mt-4" style="font-size:13px; font-weight:800; color:var(--primary);">
+                🎉 ${isAr ? 'القعدة اكتملت بـ 8 لاعبين! يلا نبدأ اللعب!' : 'Room is full with 8 players!'}
+              </div>
+            `}
+          </div>
+
+          <!-- Right: Game Options -->
+          <div class="box">
+            <h3 style="font-size:18px; font-weight:900; margin-bottom:16px;">🎛️ ${isAr ? 'إعدادات الجولة' : 'Game Options'}</h3>
+
+            <div class="form-group">
+              <label class="form-label">${isAr ? 'عدد الجولات' : 'Total Rounds'}</label>
+              <div class="pill-selector">
+                ${[3, 5, 7, 10].map(r => `
+                  <button class="pill-btn ${gameState.totalRounds === r ? 'active' : ''}" onclick="setRounds(${r})">${r} ${isAr ? 'جولات' : 'Rounds'}</button>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">${isAr ? 'وقت الافتكاس والبيع' : 'Timer Seconds'}</label>
+              <div class="pill-selector">
+                ${[45, 60, 90].map(sec => `
+                  <button class="pill-btn ${gameState.inventTime === sec ? 'active' : ''}" onclick="setInventTime(${sec})">${sec} ${isAr ? 'ثانية' : 'sec'}</button>
+                `).join('')}
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" onclick="startNewGame()" style="padding:16px; font-size:17px; margin-top:20px;">
+              🚀 ${isAr ? 'يا فتاح يا عليم.. ابدأ اللعب!' : 'Start the Game!'}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function addNewPlayer() {
+      const input = document.getElementById('newPlayerInput');
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) return;
+      soundBoing();
+      const avatars = ['🧐', '👵', '🤓', '😎', '👩‍🔬', '👑', '🧑‍💼', '🤠', '🎩', '🦄'];
+      const av = avatars[gameState.players.length % avatars.length];
+      gameState.players.push({
+        id: 'p_' + Date.now(),
+        name: val,
+        avatar: av,
+        score: 0
+      });
+      render();
+    }
+
+    function addPresetPlayer(name, avatar) {
+      if (gameState.players.length >= 8) return;
+      soundBoing();
+      gameState.players.push({
+        id: 'p_' + Date.now(),
+        name,
+        avatar,
+        score: 0
+      });
+      render();
+    }
+
+    function removePlayer(id) {
+      soundFlip();
+      gameState.players = gameState.players.filter(p => p.id !== id);
+      render();
+    }
+
+    function setRounds(r) { soundFlip(); gameState.totalRounds = r; render(); }
+    function setInventTime(sec) { soundFlip(); gameState.inventTime = sec; render(); }
+
+    /* INVENTING SCREEN */
+    function renderInventing(isAr) {
+      const p = gameState.roundProblem;
+      const i1 = gameState.roundIngredients[0];
+      const i2 = gameState.roundIngredients[1];
+      const curPlayer = gameState.players[gameState.activePlayerIndex];
+
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;" class="box">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="padding:6px 14px; border-radius:10px; background:var(--primary-light); color:var(--primary); font-weight:900;">
+              ${isAr ? 'الجولة' : 'Round'} ${gameState.currentRound} / ${gameState.totalRounds}
+            </div>
+            <div>
+              <div style="font-size:11px; color:var(--text-muted); font-weight:700;">${isAr ? 'دور المخترع الحالي:' : 'Current Inventor:'}</div>
+              <div style="font-size:18px; font-weight:900;">${curPlayer.avatar} ${curPlayer.name}</div>
+            </div>
+          </div>
+
+          <div style="font-size:12px; font-weight:800; color:var(--text-muted);">
+            (${gameState.activePlayerIndex + 1} / ${gameState.players.length})
+          </div>
+        </div>
+
+        <!-- 3 Cards -->
+        <div class="cards-grid">
+          <div class="game-card card-problem">
+            <div class="card-header">
+              <span class="card-badge">${p.icon} ${isAr ? 'كارت المشكلة المستفزة' : 'Problem to Solve'}</span>
+            </div>
+            <p class="card-text">${isAr ? p.ar : p.en}</p>
+          </div>
+
+          <div class="game-card card-ingredient">
+            <div class="card-header">
+              <span class="card-badge">${i1.icon} ${isAr ? 'المكون الإجباري 1' : 'Ingredient #1'}</span>
+            </div>
+            <p class="card-text">${isAr ? i1.ar : i1.en}</p>
+          </div>
+
+          <div class="game-card card-ingredient">
+            <div class="card-header">
+              <span class="card-badge">${i2.icon} ${isAr ? 'المكون الإجباري 2' : 'Ingredient #2'}</span>
+            </div>
+            <p class="card-text">${isAr ? i2.ar : i2.en}</p>
+          </div>
+        </div>
+
+        <!-- Invention Drafting Form -->
+        <div class="box mt-4">
+          <h2 style="font-size:22px; font-weight:900; margin-bottom:16px;">
+            ✨ ${isAr ? `يا ${curPlayer.name}.. اخترع الفنكوش واقنعنا!` : `${curPlayer.name}, craft your contraption!`}
+          </h2>
+
+          <div class="form-group">
+            <label class="form-label">${isAr ? 'اسم الاختراع الفخم *' : 'Invention Name *'}</label>
+            <input type="text" id="invName" class="form-input" placeholder="${isAr ? 'مثلاً: شبشب الصاروخ البلوتوث' : 'e.g., Rocket Flip-Flop 3000'}" maxlength="40" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${isAr ? 'السعر بالجنيه (أو الفكة) *' : 'Price *'}</label>
+            <input type="text" id="invPrice" class="form-input" placeholder="${isAr ? 'مثلاً: 199 جنيه و3 أكياس شيبسي' : 'e.g., $19.99 + free shipping'}" maxlength="30" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${isAr ? 'شعار بيعي يكسر الدنيا *' : 'Catchy Slogan *'}</label>
+            <input type="text" id="invSlogan" class="form-input" placeholder="${isAr ? 'مثلاً: مع شبشب الصاروخ.. مش هتقوم من الكنبة تاني!' : 'e.g., Never leave the couch again!'}" maxlength="80" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${isAr ? 'الميزة الخارقة وطريقة الاستعمال' : 'Super Features & Pitch Notes'}</label>
+            <textarea id="invFeatures" rows="2" class="form-textarea" placeholder="${isAr ? 'اشرح في سطرين إزاي المكونين دول بيحلوا المشكلة.. بهّر العيلة!' : 'Explain how your contraption miraculously works.'}"></textarea>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="submitPlayerInvention()" style="padding:16px; font-size:16px;">
+            ${gameState.activePlayerIndex < gameState.players.length - 1 
+              ? (isAr ? 'سجل وسلم للمخترع اللي بعده ➡️' : 'Save & Pass Device ➡️')
+              : (isAr ? 'جاهزين للبيع في الاستوديو! 📺' : 'All Set! Start Pitch Mode 📺')}
+          </button>
+        </div>
+      `;
+    }
+
+    /* PITCH SCREEN */
+    function renderPitch(isAr) {
+      const inv = gameState.inventions[gameState.activePitchIndex];
+      const isLast = gameState.activePitchIndex === gameState.inventions.length - 1;
+
+      return `
+        <div class="pitch-stage">
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            ${isAr ? 'بث مباشر · ستوديو التسوق المنزلي' : 'LIVE ON AIR · TV Shopping Channel'}
+          </div>
+
+          <div style="font-size:14px; font-weight:800; color:var(--text-muted); margin-bottom:4px;">
+            ${isAr ? 'على الهواء مباشرة المخترع والبائع:' : 'Pitching live on air:'}
+          </div>
+          <h1 style="font-size:32px; font-weight:900;">
+            ${inv.playerAvatar} ${inv.playerName}
+          </h1>
+
+          <div style="margin:16px 0;">
+            <div class="timer-badge" id="pitchTimerText">${gameState.pitchTimer}s</div>
+            <div style="margin-top:8px;">
+              <button class="btn btn-secondary" onclick="startPitchTimer()" style="padding:6px 14px; font-size:12px;">
+                ▶ ${isAr ? 'شغل العداد' : 'Start Timer'}
+              </button>
+            </div>
+          </div>
+
+          <!-- Teleprompter Cue Card -->
+          <div class="cue-card">
+            <div style="font-size:12px; font-weight:800; color:var(--primary); text-transform:uppercase;">
+              ${isAr ? 'المنتج المعروض للبيع حالياً' : 'Featured Contraption'}
+            </div>
+            <h2 class="cue-title">«${inv.name}»</h2>
+            <div class="cue-slogan">"${inv.slogan}"</div>
+            <div class="cue-price">💰 ${isAr ? 'السعر الصادم:' : 'Price:'} <strong>${inv.price}</strong></div>
+            <p style="font-size:14px; color:var(--text-muted); line-height:1.6;">${inv.features}</p>
+          </div>
+
+          <!-- Audience Soundboard -->
+          <div style="font-size:12px; font-weight:800; color:var(--text-muted); margin-bottom:8px;">
+            📢 ${isAr ? 'لوحة المؤثرات الصوتية للعيلة أثناء البيع:' : 'Live Soundboard for Audience:'}
+          </div>
+          <div class="soundboard">
+            <button class="sound-btn" onclick="soundApplause()">👏 ${isAr ? 'تصفيق حار' : 'Applause'}</button>
+            <button class="sound-btn" onclick="soundCash()">💰 ${isAr ? 'كاشير فلوس' : 'Cha-ching'}</button>
+            <button class="sound-btn" onclick="soundGong()">🔔 ${isAr ? 'جرس تنبيه' : 'Bell Ring'}</button>
+            <button class="sound-btn" onclick="soundBoing()">🤣 ${isAr ? 'زامور الضحك' : 'Boing!'}</button>
+          </div>
+
+          <div style="margin-top:24px;">
+            <button class="btn btn-primary" onclick="nextPitcher()" style="padding:14px 28px; font-size:16px;">
+              ${isLast 
+                ? (isAr ? 'خلصنا البيع.. نروح لصندوق الانتخابات! 🗳️' : 'All Pitches Done! Go to Voting 🗳️')
+                : (isAr ? 'المخترع اللي بعده 👉' : 'Next Pitcher 👉')}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    /* VOTING SCREEN */
+    function renderVoting(isAr) {
+      const curVoter = gameState.players[gameState.activeVoterIndex];
+
+      const cardsHtml = gameState.inventions.map(inv => {
+        const isSelf = inv.playerId === curVoter.id;
+        const isSelected = gameState.selectedVoteId === inv.id;
+
+        return `
+          <div class="vote-card ${isSelf ? 'disabled' : ''} ${isSelected ? 'selected' : ''}" 
+               onclick="${isSelf ? '' : `selectVote('${inv.id}')`}">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:24px;">${inv.playerAvatar}</span>
+                <div>
+                  <div style="font-size:11px; color:var(--text-muted); font-weight:700;">${inv.playerName}</div>
+                  <div style="font-size:16px; font-weight:900;">«${inv.name}»</div>
+                </div>
+              </div>
+              ${isSelf ? `
+                <span style="font-size:10px; font-weight:800; background:var(--bg-subtle); padding:2px 8px; border-radius:6px;">
+                  ${isAr ? 'اختراعك' : 'Yours'}
+                </span>
+              ` : isSelected ? `
+                <span style="font-size:18px;">✅</span>
+              ` : ''}
+            </div>
+
+            <p style="font-size:13px; font-style:italic; color:var(--text-muted); margin:8px 0;">"${inv.slogan}"</p>
+            <div style="font-size:12px; font-weight:800; color:var(--teal);">💰 ${inv.price}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="box">
+          <div class="text-center mb-4">
+            <div class="hero-kicker">🗳️ ${isAr ? 'صندوق الانتخابات العائلية' : 'Secret Ballot'}</div>
+            <h1 style="font-size:28px; font-weight:900;">${isAr ? 'صوت لأحسن وأشطر افتكاسة' : 'Vote for the Best Pitch!'}</h1>
+            <p style="color:var(--text-muted); font-size:14px;">
+              ${isAr ? `مين بيصوت دلوقتي: ${curVoter.avatar} ${curVoter.name} (ممنوع تصوت لنفسك!)` : `Currently voting: ${curVoter.name} (no self-voting!)`}
+            </p>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin:20px 0;">
+            ${cardsHtml}
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="castVote()" style="padding:16px; font-size:16px;">
+            ${gameState.activeVoterIndex < gameState.players.length - 1
+              ? (isAr ? 'اعتمد صوتي وسلم للي بعده 🗳️' : 'Cast Vote & Pass Device 🗳️')
+              : (isAr ? 'اعتماد آخر صوت وكشف البطل! 🏆' : 'Final Vote & Reveal Champion! 🏆')}
+          </button>
+        </div>
+      `;
+    }
+
+    function selectVote(id) {
+      soundBoing();
+      gameState.selectedVoteId = id;
+      render();
+    }
+
+    /* ROUND REVEAL SCREEN */
+    function renderRoundReveal(isAr) {
+      const sorted = [...gameState.inventions].sort((a,b) => b.votes - a.votes);
+      const winner = sorted[0];
+      const isFinal = gameState.currentRound >= gameState.totalRounds;
+
+      const standingsHtml = [...gameState.players].sort((a,b) => b.score - a.score).map((p, idx) => `
+        <div class="player-row">
+          <div class="player-info">
+            <span style="font-weight:900; color:var(--text-light); width:20px;">#${idx+1}</span>
+            <span style="font-size:22px;">${p.avatar}</span>
+            <span style="font-weight:800;">${p.name}</span>
+          </div>
+          <div style="font-weight:900; color:var(--primary); font-size:16px;">
+            ${p.score} ${isAr ? 'نقط' : 'pts'}
+          </div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="box text-center">
+          <div class="hero-kicker">🏆 ${isAr ? 'بطل الجولة دي هو:' : 'Round Champion'}</div>
+          <h1 style="font-size:36px; font-weight:900; margin:8px 0;">
+            ${winner.playerAvatar} ${winner.playerName}
+          </h1>
+          <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">
+            ${isAr ? `كسب قلوب العيلة بـ ${winner.votes} أصوات!` : `Won family hearts with ${winner.votes} votes!`}
+          </p>
+
+          <div class="cue-card" style="max-width:480px; margin:0 auto 20px;">
+            <h2 style="font-size:24px; font-weight:900;">«${winner.name}»</h2>
+            <div class="cue-slogan">"${winner.slogan}"</div>
+            <div class="cue-price">💰 ${winner.price}</div>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:8px; margin-bottom:24px;">
+            <button class="btn btn-secondary" onclick='saveToGallery(${JSON.stringify(winner)})'>
+              💾 ${isAr ? 'احفظ الاختراع في المعرض' : 'Save to Gallery'}
+            </button>
+          </div>
+
+          <h3 style="font-size:16px; font-weight:900; margin-bottom:12px; text-align:start;">
+            📊 ${isAr ? 'جدول ترتيب الحريفة حتى الآن:' : 'Current Standings:'}
+          </h3>
+          <div>${standingsHtml}</div>
+
+          <button class="btn btn-primary btn-block mt-4" onclick="nextRoundOrFinish()" style="padding:16px; font-size:16px;">
+            ${isFinal 
+              ? (isAr ? 'شوف النتيجة النهائية وتتويج الملك! 👑' : 'View Tournament Results! 👑')
+              : (isAr ? 'الجولة اللي بعدها 🚀' : 'Next Round 🚀')}
+          </button>
+        </div>
+      `;
+    }
+
+    /* GAME OVER SCREEN */
+    function renderGameOver(isAr) {
+      const ranked = [...gameState.players].sort((a,b) => b.score - a.score);
+      const champion = ranked[0];
+
+      return `
+        <div class="box text-center">
+          <div class="hero-kicker">👑 ${isAr ? 'ملك الفتاكة والاختراعات بلا منازع' : 'Grand Tournament Champion'}</div>
+          <h1 style="font-size:42px; font-weight:900; margin:10px 0;">
+            ${champion.avatar} ${champion.name}
+          </h1>
+          <p style="color:var(--text-muted); font-size:16px;">
+            ${isAr ? `تُوّج بطلاً للبطولة بمجموع ${champion.score} نقطة!` : `Crowned champion with ${champion.score} points!`}
+          </p>
+
+          <!-- Podium -->
+          <div class="podium">
+            ${ranked[1] ? `
+              <div class="podium-step">
+                <div style="font-size:32px;">${ranked[1].avatar}</div>
+                <div style="font-weight:800; font-size:13px; margin:4px 0;">${ranked[1].name}</div>
+                <div class="podium-box step-2">
+                  <span>🥈 2nd</span>
+                  <span style="font-size:12px;">${ranked[1].score} pts</span>
+                </div>
+              </div>
+            ` : ''}
+
+            <div class="podium-step">
+              <div style="font-size:44px;">${champion.avatar}</div>
+              <div style="font-weight:900; font-size:15px; margin:4px 0;">${champion.name}</div>
+              <div class="podium-box step-1">
+                <span>🥇 1st</span>
+                <span style="font-size:13px;">${champion.score} pts</span>
+              </div>
+            </div>
+
+            ${ranked[2] ? `
+              <div class="podium-step">
+                <div style="font-size:32px;">${ranked[2].avatar}</div>
+                <div style="font-weight:800; font-size:13px; margin:4px 0;">${ranked[2].name}</div>
+                <div class="podium-box step-3">
+                  <span>🥉 3rd</span>
+                  <span style="font-size:12px;">${ranked[2].score} pts</span>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:24px;">
+            <button class="btn btn-primary" onclick="startNewGame()">
+              🔄 ${isAr ? 'العب تاني بنفس اللمة' : 'Rematch (Same Players)'}
+            </button>
+            <button class="btn btn-secondary" onclick="navigateTo('lobby')">
+              👥 ${isAr ? 'لعبة جديدة ولاعبين جداد' : 'New Game (Change Players)'}
+            </button>
+            <button class="btn btn-secondary" onclick="navigateTo('gallery')">
+              🏆 ${isAr ? 'معرض الافتكاسات' : 'View Gallery'}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    /* GALLERY */
+    function renderGallery(isAr) {
+      let items = [];
+      try {
+        items = JSON.parse(localStorage.getItem(STORAGE.GALLERY) || '[]');
+      } catch (_) {}
+
+      let itemsHtml = items.map((inv, idx) => `
+        <div class="box" style="margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-size:28px;">${inv.playerAvatar || '💡'}</span>
+              <div>
+                <div style="font-size:11px; color:var(--text-muted); font-weight:700;">${inv.playerName} · ${inv.savedAt}</div>
+                <h3 style="font-size:18px; font-weight:900;">«${inv.name}»</h3>
+              </div>
+            </div>
+            <button class="del-btn" onclick="deleteGalleryItem(${idx})">🗑️</button>
+          </div>
+          <div style="font-style:italic; color:var(--primary); font-weight:700; margin:8px 0;">"${inv.slogan}"</div>
+          <div style="font-size:13px; font-weight:800; color:var(--teal);">💰 ${inv.price}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="box">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h1 style="font-size:26px; font-weight:900;">🏆 ${isAr ? 'معرض افتكاسات العيلة' : 'Invention Gallery'}</h1>
+            ${items.length > 0 ? `
+              <button class="btn btn-secondary" onclick="clearGallery()" style="padding:6px 12px; font-size:12px; color:var(--rose);">
+                ${isAr ? 'تفريغ المعرض' : 'Clear All'}
+              </button>
+            ` : ''}
+          </div>
+
+          ${items.length === 0 ? `
+            <div class="text-center" style="padding:40px 16px;">
+              <div style="font-size:40px; margin-bottom:12px;">💡</div>
+              <h3 style="font-size:18px; font-weight:900;">${isAr ? 'المعرض لسه فاضي..' : 'Gallery is Empty'}</h3>
+              <p style="color:var(--text-muted); font-size:13px; margin:6px 0 16px;">
+                ${isAr ? 'العبوا جولة واحفظوا أحلى افتكاسات عشان تلاقوها هنا دايماً!' : 'Play a game and save your favorite inventions here!'}
+              </p>
+              <button class="btn btn-primary" onclick="navigateTo('lobby')">${isAr ? 'يلا نلعب!' : 'Play Now!'}</button>
+            </div>
+          ` : `
+            <div>${itemsHtml}</div>
+          `}
+        </div>
+      `;
+    }
+
+    function deleteGalleryItem(idx) {
+      soundFlip();
+      const items = JSON.parse(localStorage.getItem(STORAGE.GALLERY) || '[]');
+      items.splice(idx, 1);
+      localStorage.setItem(STORAGE.GALLERY, JSON.stringify(items));
+      render();
+    }
+
+    function clearGallery() {
+      if (confirm(gameState.language === 'ar' ? 'تأكيد مسح المعرض؟' : 'Clear all items?')) {
+        soundBoing();
+        localStorage.removeItem(STORAGE.GALLERY);
+        render();
+      }
+    }
+
+    /* CUSTOM CARDS */
+    function renderCustomCards(isAr) {
+      let customP = JSON.parse(localStorage.getItem(STORAGE.CUSTOM_PROBLEMS) || '[]');
+      let customI = JSON.parse(localStorage.getItem(STORAGE.CUSTOM_INGREDIENTS) || '[]');
+
+      return `
+        <div class="box">
+          <h1 style="font-size:26px; font-weight:900; margin-bottom:6px;">✨ ${isAr ? 'كروت ومقالب العيلة الخاصة' : 'Custom Cards'}</h1>
+          <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">
+            ${isAr ? 'ضيفوا مشاكل من بيتكم ومكونات مجنونة عشان اللعب يبقى شخصي وموت من الضحك!' : 'Add your own family problems and ingredients!'}
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr; gap:20px;">
+            <!-- Add Problem -->
+            <div style="padding:16px; border-radius:12px; background:var(--bg-subtle);">
+              <h3 style="font-size:16px; font-weight:900; margin-bottom:10px;">⚠️ ${isAr ? 'إضافة كارت ورطة جديدة' : 'Add Problem Card'}</h3>
+              <div style="display:flex; gap:8px;">
+                <input type="text" id="customProblemInput" placeholder="${isAr ? 'مثلاً: بابا بينام قدام نشرة الأخبار ويقول: أنا سامع!' : 'e.g., Dad sleeps during the news!'}" class="form-input" />
+                <button class="btn btn-primary" onclick="addCustomCard('problem')">${isAr ? 'حفظ' : 'Save'}</button>
+              </div>
+            </div>
+
+            <!-- Add Ingredient -->
+            <div style="padding:16px; border-radius:12px; background:var(--bg-subtle);">
+              <h3 style="font-size:16px; font-weight:900; margin-bottom:10px;">🧪 ${isAr ? 'إضافة كارت مكون عجيب' : 'Add Ingredient Card'}</h3>
+              <div style="display:flex; gap:8px;">
+                <input type="text" id="customIngredientInput" placeholder="${isAr ? 'مثلاً: فردة شراب صوف ومعاها بطارية ريموت فاضية' : 'e.g., Old woolen sock with a dead battery'}" class="form-input" />
+                <button class="btn btn-primary" onclick="addCustomCard('ingredient')">${isAr ? 'حفظ' : 'Save'}</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Existing List -->
+          <div class="mt-4">
+            <h3 style="font-size:16px; font-weight:900; margin-bottom:10px;">📋 ${isAr ? 'الكروت المضافة حالياً:' : 'Your Custom Cards:'}</h3>
+            ${customP.length === 0 && customI.length === 0 ? `
+              <div style="font-size:12px; color:var(--text-muted);">${isAr ? 'لسه ما ضيفتوش كروت مخصصة.. ضيفوا أول كارت فوق!' : 'No custom cards yet.'}</div>
+            ` : `
+              <div style="display:grid; gap:8px;">
+                ${customP.map((c, i) => `
+                  <div class="player-row">
+                    <span>⚠️ ${c.ar}</span>
+                    <button class="del-btn" onclick="deleteCustomCard('problem', ${i})">🗑️</button>
+                  </div>
+                `).join('')}
+                ${customI.map((c, i) => `
+                  <div class="player-row">
+                    <span>🧪 ${c.ar}</span>
+                    <button class="del-btn" onclick="deleteCustomCard('ingredient', ${i})">🗑️</button>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function addCustomCard(type) {
+      soundCash();
+      if (type === 'problem') {
+        const input = document.getElementById('customProblemInput');
+        if (!input || !input.value.trim()) return;
+        const list = JSON.parse(localStorage.getItem(STORAGE.CUSTOM_PROBLEMS) || '[]');
+        list.push({ id: 'cp_' + Date.now(), ar: input.value.trim(), en: input.value.trim(), icon: '⚠️' });
+        localStorage.setItem(STORAGE.CUSTOM_PROBLEMS, JSON.stringify(list));
+      } else {
+        const input = document.getElementById('customIngredientInput');
+        if (!input || !input.value.trim()) return;
+        const list = JSON.parse(localStorage.getItem(STORAGE.CUSTOM_INGREDIENTS) || '[]');
+        list.push({ id: 'ci_' + Date.now(), ar: input.value.trim(), en: input.value.trim(), icon: '🧪' });
+        localStorage.setItem(STORAGE.CUSTOM_INGREDIENTS, JSON.stringify(list));
+      }
+      render();
+    }
+
+    function deleteCustomCard(type, index) {
+      soundFlip();
+      const key = type === 'problem' ? STORAGE.CUSTOM_PROBLEMS : STORAGE.CUSTOM_INGREDIENTS;
+      const list = JSON.parse(localStorage.getItem(key) || '[]');
+      list.splice(index, 1);
+      localStorage.setItem(key, JSON.stringify(list));
+      render();
+    }
+
+    /* RULES & SECRETS GUIDE */
+    function renderRules(isAr) {
+      return `
+        <div class="box">
+          <h1 style="font-size:28px; font-weight:900; margin-bottom:12px;">📖 ${isAr ? 'كتالوج اللعبة وأسرار بياع التلفزيون' : 'Rules & Pitch Secrets'}</h1>
+
+          <div style="line-height:1.8; color:var(--text-muted); font-size:14px; margin-bottom:24px;">
+            ${isAr ? `
+              <p>🎯 <strong>الهدف:</strong> تجمع أكبر عدد من أصوات العيلة عن طريق اختراع أغرب منتج وحبكه بإقناع كوميدي زي بياعين قنوات الإعلانات!</p>
+              <p>👥 <strong>اللاعبين:</strong> من 3 لـ 8 لاعبين على شاشة واحدة (موبايل، تابلت، أو تلفزيون).</p>
+              <p>⏱️ <strong>الوقت:</strong> 60 ثانية لكل لاعب لتجهيز الافتكاسة، ثم كل واحد بيطلع في الاستوديو يبيع اختراعه!</p>
+            ` : `
+              <p>🎯 <strong>Goal:</strong> Pitch hilarious contraptions to solve wacky problems and win family votes!</p>
+              <p>👥 <strong>Players:</strong> 3 to 8 players on a single shared screen or phone.</p>
+              <p>⏱️ <strong>Time:</strong> 60 seconds to invent, then pitch out loud live!</p>
+            `}
+          </div>
+
+          <h2 style="font-size:20px; font-weight:900; margin-bottom:12px; color:var(--primary);">
+            🔥 ${isAr ? 'أسرار بياع التلفزيون المحترف:' : 'TV Pitch Secrets:'}
+          </h2>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;">
+            <div style="padding:14px; border-radius:12px; background:var(--bg-subtle);">
+              <h4 style="font-weight:900; font-size:14px; color:var(--text-main); margin-bottom:4px;">${isAr ? '1. جملة البداية الصادمة' : '1. The Shock Hook'}</h4>
+              <p style="font-size:12px; color:var(--text-muted);">${isAr ? 'ابدأ بصوت عالي: «يا مدام! زهقتي من كراكيب الصالة؟ الحل السحري وصل أخيراً!»' : 'Open loud: "Ladies and gentlemen, are you tired of..."'}</p>
+            </div>
+
+            <div style="padding:14px; border-radius:12px; background:var(--bg-subtle);">
+              <h4 style="font-weight:900; font-size:14px; color:var(--text-main); margin-bottom:4px;">${isAr ? '2. الخصم الوهمي' : '2. The Fake Limited Deal'}</h4>
+              <p style="font-size:12px; color:var(--text-muted);">${isAr ? '«المنتج ده بمليون جنيه في الساحل.. لكن لأول 3 هيصوتوا لي: بـ 99 جنيه وشكراً!»' : '"Normally $1,000,000, but today only $19.99 for the first 3!"'}</p>
+            </div>
+
+            <div style="padding:14px; border-radius:12px; background:var(--bg-subtle);">
+              <h4 style="font-weight:900; font-size:14px; color:var(--text-main); margin-bottom:4px;">${isAr ? '3. الميزة الخيالية' : '3. The Miracle Feature'}</h4>
+              <p style="font-size:12px; color:var(--text-muted);">${isAr ? '«الموزة اللي في الاختراع مش للأكل.. دي شريحة ذكاء اصطناعي بتنور في الضلمة!»' : '"The banana acts as a quantum GPS sensor!"'}</p>
+            </div>
+
+            <div style="padding:14px; border-radius:12px; background:var(--bg-subtle);">
+              <h4 style="font-weight:900; font-size:14px; color:var(--text-main); margin-bottom:4px;">${isAr ? '4. الضمان الأبدي' : '4. The Golden Guarantee'}</h4>
+              <p style="font-size:12px; color:var(--text-muted);">${isAr ? '«لو المنتج منفّعكش.. هرجعلك فلوسك وهعملك شاي بلبن بإيدي!»' : '"100% satisfaction or your money back!"'}</p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block mt-4" onclick="navigateTo('lobby')" style="padding:14px;">
+            🚀 ${isAr ? 'فهمنا كل حاجة.. يلا نلعب!' : 'Got it.. Let’s Play!'}
+          </button>
+        </div>
+      `;
+    }
+
+    /* =====================================================================
+       8. INITIAL BOOTSTRAP ON LOAD
+       ===================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Check system dark mode preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        toggleTheme();
+      }
+      render();
+    });
+  </script>
+</body>
 </html>
