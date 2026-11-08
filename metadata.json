@@ -1,0 +1,6 @@
+{
+  "name": "Invent It! — لعبة اخترعها! العائلية",
+  "description": "لعبة حفلات عائلية كوميدية ومبتكرة من 3 إلى 8 لاعبين - اخترع أغرب المنتجات وسوّقها زي بياعين التلفزيون واكسب أصوات العائلة!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
